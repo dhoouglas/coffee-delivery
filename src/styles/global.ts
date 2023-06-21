@@ -27,4 +27,13 @@ export const GlobalStyle = createGlobalStyle`
     a {
         text-decoration: none;
     }
-`
+
+    input[type=number]::-webkit-outer-spin-button,
+    input[type=number]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+    }
+
+    input[type="number"] {
+        -moz-appearance: textfield;
+    }
+`;

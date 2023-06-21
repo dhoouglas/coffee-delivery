@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import introBackgroundImg from "../../../../assets/intro-background.png"
 import { rgba } from "polished";
-import { Titletext } from "../../../../components/Typography";
+import { TitleText } from "../../../../components/Typography";
 
 export const IntroContainer = styled.section`
     width: 100%;
@@ -27,7 +27,7 @@ export const IntroContent = styled.div`
     gap: 3.5rem;
 `;
 
-export const IntroTitle = styled(Titletext)`
+export const IntroTitle = styled(TitleText)`
     margin-bottom: 1rem;
 `;
 

@@ -12,7 +12,7 @@ interface RegularTextProps {
     weight?: string | number;
 }
 
-export const Titletext = styled.h1<TitleTextProps>`
+export const TitleText = styled.h1<TitleTextProps>`
     color: ${({ theme, color }) => theme.colors[`base-${color ?? "title"}`]};
     font-size: ${({ theme, size }) => theme.textSizes[`title-title-${size ?? "m"}`]};
     font-family: ${({ theme }) => theme.fonts.title};
@@ -20,7 +20,7 @@ export const Titletext = styled.h1<TitleTextProps>`
     font-weight: ${({ weight }) => weight ?? 800};
 `;
 
-export const Regulartext = styled.h1<RegularTextProps>`
+export const RegularText = styled.h1<RegularTextProps>`
     color: ${({ theme, color }) => theme.colors[`base-${color ?? "title"}`]};
     font-size: ${({ theme, size }) => theme.textSizes[`text-regular-${size ?? "m"}`]};
     font-family: ${({ theme }) => theme.fonts.regular};

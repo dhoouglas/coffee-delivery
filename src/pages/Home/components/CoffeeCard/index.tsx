@@ -1,4 +1,7 @@
-import { CoffeeCardContainer, Description, Name, Tags } from "./styles";
+import { ShoppingCart } from "phosphor-react";
+import { QuantityInput } from "../../../../components/QuantityInput";
+import { RegularText, TitleText } from "../../../../components/Typography";
+import { AddCartWrapper, CardFooter, CoffeeCardContainer, Description, Name, Tags } from "./styles";
 
 export function CoffeeCard() {
     return (
@@ -16,6 +19,24 @@ export function CoffeeCard() {
                 O tradicional café feito com água quente e grãos moídos
             </Description>
 
+            <CardFooter>
+                <div>
+                    <RegularText size="s">R$</RegularText>
+                    <TitleText size="m" color="text" as="strong">
+                        90,00    
+                    </TitleText>    
+                </div> 
+
+                <AddCartWrapper>
+                    <QuantityInput />
+                    <button>
+                        <ShoppingCart weight="fill" size={22} />
+                    </button>
+                </AddCartWrapper>
+            </CardFooter>
+
         </CoffeeCardContainer>
+
+        
     )
 }
