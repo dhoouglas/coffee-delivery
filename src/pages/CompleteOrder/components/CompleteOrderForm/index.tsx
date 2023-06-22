@@ -4,6 +4,7 @@ import { TitleText } from "../../../../components/Typography";
 import { SectionTitle } from "../SectionTitle";
 import { CurrencyDollar, MapPinLine } from "phosphor-react";
 import { AddressForm } from "./AddressForm";
+import { PaymentMethodOptions } from "./PaymentMethodOptions";
 
 export function CompleteOrderForm() {
     const { colors } = useTheme();
@@ -22,7 +23,6 @@ export function CompleteOrderForm() {
                 />
 
                 <AddressForm />
-
             </FormSectionContainer>
 
             <FormSectionContainer>
@@ -32,6 +32,7 @@ export function CompleteOrderForm() {
                     icon={<CurrencyDollar color={colors["brand-purple"]} size={22} />}
                 />
 
+                <PaymentMethodOptions />
             </FormSectionContainer>
         </CompleteOrderFormContainer>
 
