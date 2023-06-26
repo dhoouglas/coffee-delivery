@@ -2,22 +2,51 @@ import { Trash } from "phosphor-react";
 import { QuantityInput } from "../../../../components/QuantityInput";
 import { RegularText } from "../../../../components/Typography";
 import { ActionsContainer, CoffeeCartCardContainer, RemoveButton } from "./styles";
+import { CartItem } from "../../../../contexts/CartContext";
+import { formatMoney } from "../../../../util/formatMoney";
+import { useCart } from "../../../../hooks/useCart";
 
-export function CoffeeCartCard() {
+interface CoffeeCartCardProps {
+    coffee: CartItem;
+}
+
+export function CoffeeCartCard({ coffee }: CoffeeCartCardProps) {
+    const { changeCartItemQuantity, removeCartItem } = useCart();
+
+    function handleIncrease() {
+        changeCartItemQuantity(coffee.id, 'increase');
+    }
+
+    function handleDecrease() {
+        changeCartItemQuantity(coffee.id, 'decrease');
+    }
+
+    function handelRemove() {
+        removeCartItem(coffee.id);
+    }
+
+    const coffeeTotal = coffee.price * coffee.quantity;
+    const formattedPrice = formatMoney(coffeeTotal);
+
     return (
         <CoffeeCartCardContainer>
             <div>
-                <img src="https://s3-alpha-sig.figma.com/img/55b1/f9ee/64600f98b2bae456b96fdc624c4b4f47?Expires=1688342400&Signature=d7q0vnnMDmtDMgOsuOZm0jiWML4zb9YzHeHKh7GQeAtXfLeVaP5DZTzAJy1PwWssAHY~IZ6FtQ6z0IDYHQckTF8koWbkLPykA-1R3gLK7YJVKWxNJ2thEof0tc-oILNO8D5aGC5KVwgy6bgNshM5A-Is1sx0c9hhvehfaWIrRP-SiPwBn51anmPW2WPq9VIbgGhvAZiFxlcO1tdC~hFMohd79WG1KiBPmCwjikfqxa2whaqw6nNEbvdbxNYU9y-ssw8OgYI9yo8Nn2aXd8g1MBULpg9t8kG~Suj4wXDW6fSJNM2QUd6b3ONhtkPA9t2SSxgknsFttLPFD-L7dmrEPw__&Key-Pair-Id=APKAQ4GOSFWCVNEHN3O4" alt="" />
+                <img src={`/coffees/${coffee.photo}`} alt="" />
 
                 <div>
                     <RegularText color="subtitle">
-                        Expresso Tradicional
+                        {coffee.name}
                     </RegularText>
 
                     <ActionsContainer>
-                        <QuantityInput size="small" />
+                        <QuantityInput 
+                            size="small" 
+                            quantity={coffee.quantity}
+                            onIncrease={handleIncrease}
+                            onDecrease={handleDecrease}
+                        />
 
-                        <RemoveButton>
+                        <RemoveButton onClick={handelRemove}>
                             <Trash size={16} />
                             REMOVER    
                         </RemoveButton>    
@@ -25,7 +54,7 @@ export function CoffeeCartCard() {
                 </div>
             </div>
 
-            <p>R$ 9,90</p>    
+            <p>R$ {formattedPrice}</p>    
         </CoffeeCartCardContainer>
     );
 }
