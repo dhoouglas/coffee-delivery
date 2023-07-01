@@ -4,9 +4,29 @@ import confirmedOrderIllustration from "../../assets/confirmed-order.svg";
 import { RegularText, TitleText } from "../../components/Typography";
 import { OrderConfirmedContainer, OrderDatailsContainer } from "./styles";
 import { useTheme } from "styled-components";
+import { OrderData } from "../CompleteOrder";
+import { useLocation, useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import { paymentMethods } from "../CompleteOrder/components/CompleteOrderForm/PaymentMethodOptions";
+
+interface LocationType {
+    state: OrderData
+}
 
 export function OrderConfirmedPage() {
     const { colors } = useTheme();
+
+    const { state } = useLocation() as unknown as LocationType;
+
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!state) {
+            navigate("/");
+        }
+    }, []);
+
+    if (!state) return <></>;
 
     return (
         <OrderConfirmedContainer className="container">
@@ -26,9 +46,9 @@ export function OrderConfirmedPage() {
                         iconBg={colors["brand-purple"]}
                         text={
                             <RegularText>
-                                Entrega em <strong>Rua Barbacena, 18</strong>
+                                Entrega em <strong>{state.street}</strong>
                                 <br />
-                                Areia Branca - Belford Roxo - RJ
+                                {state.district} - {state.city}, {state.uf}
                             </RegularText>
                         }
                     />
@@ -52,7 +72,7 @@ export function OrderConfirmedPage() {
                             <RegularText>
                                 Pagamento na entrega
                                 <br />
-                                <strong>Dinheiro</strong>
+                                <strong>{paymentMethods[state.paymentMethod].label}</strong>
                             </RegularText>
                         }
                     />
